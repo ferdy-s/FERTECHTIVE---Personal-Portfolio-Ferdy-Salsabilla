@@ -36,69 +36,7 @@ Website ini dibangun untuk memenuhi standar performa tinggi, keamanan data yang 
 
 ---
 
-## 4. Arsitektur Sistem
-
-```
-
-fertechive/
-├── app/
-│   ├── about/
-│   ├── portfolio/
-│   ├── blog/
-│   ├── contact/
-│   ├── admin/
-│   │   ├── dashboard/
-│   │   ├── posts/
-│   │   ├── projects/
-│   │   ├── seo/
-│   ├── layout.tsx
-│   ├── page.tsx
-├── components/
-│   ├── ui/
-│   ├── navigation/
-│   ├── seo/
-│   ├── forms/
-│   ├── cards/
-│   ├── portfolio/
-│   ├── blog/
-├── lib/
-│   ├── prisma.ts
-│   ├── seo.ts
-│   ├── schema.ts
-│   ├── utils.ts
-├── prisma/
-│   ├── schema.prisma
-├── public/
-│   ├── assets/
-│   ├── favicon.ico
-│   ├── sitemap.xml
-│   ├── robots.txt
-├── .env
-├── next.config.mjs
-├── tsconfig.json
-├── package.json
-
-````
-
----
-
-## 5. Struktur Database (PostgreSQL via Prisma ORM)
-
-### Tabel dan Deskripsi
-
-| Nama Tabel | Deskripsi |
-|-------------|------------|
-| `users` | Menyimpan data pengguna dan kredensial admin CMS |
-| `projects` | Data portofolio meliputi judul, deskripsi, kategori, tautan, dan gambar |
-| `posts` | Artikel blog termasuk konten, slug, dan metadata SEO |
-| `categories` | Kategori untuk mengelompokkan proyek dan artikel |
-| `seo_settings` | Konfigurasi SEO global (meta title, description, schema type) |
-| `messages` | Pesan dari form kontak pengguna yang masuk ke sistem |
-| `media_assets` | Metadata file media yang diunggah melalui CMS |
-
----
-
-## 6. Modul Utama
+## 4. Modul Utama
 
 ### Modul Tentang Saya
 - Menampilkan profil profesional Ferdy Salsabilla dengan pendekatan storytelling.
@@ -130,7 +68,7 @@ fertechive/
 
 ---
 
-## 7. Implementasi SEO Teknis
+## 5. Implementasi SEO Teknis
 
 ### Struktur Metadata Dinamis
 Setiap halaman memiliki metadata dinamis yang diambil dari database atau konfigurasi global:
@@ -174,7 +112,7 @@ import { ArticleJsonLd } from "next-seo";
 
 ---
 
-## 8. Optimasi Performa
+## 6. Optimasi Performa
 
 1. **Server Side Rendering (SSR)** untuk konten dinamis dengan caching efisien.
 2. **Static Generation (SSG)** untuk halaman portfolio dan blog.
@@ -186,7 +124,9 @@ import { ArticleJsonLd } from "next-seo";
 
 ---
 
-## 9. Responsivitas dan Mobile Optimization
+## 7. Responsivitas dan Mobile Optimization
+
+## Tampilan Page Portfolio
 
 * Layout adaptif berbasis grid responsive Tailwind CSS.
 * Navigasi mobile menggunakan drawer interaktif dengan animasi transisi.
@@ -198,9 +138,33 @@ import { ArticleJsonLd } from "next-seo";
 | ----------------------------------------------------- | --------------------------------------------------- |
 | <img width="2861" height="1667" alt="Screenshot 2025-10-21 112624" src="https://github.com/user-attachments/assets/de072e67-663b-43f7-bdfa-ab5890c53cce" /> | <img width="688" height="1483" alt="Screenshot 2025-10-21 112957" src="https://github.com/user-attachments/assets/726654b1-b52d-4d1c-a9bd-5535ea5d40ff" /> |
 
+## Tampilan Page Dashboard Admin
+
+Fertechtive Admin CMS adalah content management dashboard modern yang dirancang untuk mengelola seluruh ekosistem konten — mulai dari blog, project portfolio, hingga permintaan CV — dalam satu antarmuka yang efisien dan elegan.
+Dibangun dengan prinsip modern UI/UX 2025, sistem ini tidak hanya berfungsi sebagai pengelola konten internal, tetapi juga dioptimalkan untuk mendukung strategi SEO dinamis guna meningkatkan visibilitas website di mesin pencari.
+
+**Fitur Utama**
+
+* Manajemen Proyek & Artikel - Tambah, ubah, dan arsipkan project serta postingan blog dengan mudah.
+
+* SEO Integration - Setiap konten dilengkapi meta data dan analitik yang dirancang untuk meningkatkan performa SEO.
+
+* Activity Monitoring - Lihat aktivitas terkini dan performa sistem secara real time.
+
+* System Health Panel - Pantau status server, database, dan resource usage dengan tampilan ringkas dan intuitif.
+
+* Dark Mode Interface - Desain futuristik dengan fokus pada keterbacaan dan kenyamanan pengguna profesional.
+
+**Tujuan Pengembangan**
+
+Dashboard ini dikembangkan untuk menjadi pusat kendali bagi seluruh aktivitas digital Fertechtive mulai dari publikasi konten, manajemen proyek, hingga content optimization dalam satu sistem yang efisien, elegan, dan terintegrasi.
+
+<img width="2832" height="1661" alt="Screenshot 2025-10-23 134800" src="https://github.com/user-attachments/assets/016ec7d4-f82d-463a-bcb3-39bba4ea23da" />
+
+
 ---
 
-## 10. Deployment dan Integrasi
+## 8. Deployment dan Integrasi
 
 | Komponen              | Platform                                 |
 | --------------------- | ---------------------------------------- |
@@ -214,7 +178,7 @@ import { ArticleJsonLd } from "next-seo";
 
 ---
 
-## 11. Keamanan Sistem
+## 9. Keamanan Sistem
 
 * Enkripsi environment variable di file `.env` (tidak diunggah ke repo).
 * Validasi input server-side menggunakan Zod dan Prisma validator.
@@ -224,7 +188,7 @@ import { ArticleJsonLd } from "next-seo";
 
 ---
 
-## 12. Pengujian dan Maintenance
+## 10. Pengujian dan Maintenance
 
 * Unit Testing untuk API Routes menggunakan Jest.
 * Integration Testing CMS CRUD menggunakan Playwright.
@@ -234,7 +198,7 @@ import { ArticleJsonLd } from "next-seo";
 
 ---
 
-## 13. Kontributor
+## 11. Kontributor
 
 Seluruh proses desain, pengembangan, dan implementasi sistem Fertechive — meliputi UI UX Design, Front-End Development, Back-End Programming, Database Architecture, SEO Implementation, CMS Engineering, serta Deployment dikerjakan secara penuh oleh:
 
@@ -243,7 +207,7 @@ Full Stack Developer dan System Architect
 
 ---
 
-## 14. Lisensi
+## 12. Lisensi
 
 Fertechive dikembangkan dan dimiliki sepenuhnya oleh Ferdy Salsabilla.
 Seluruh kode, desain, dan dokumentasi berada di bawah lisensi **MIT License**.
