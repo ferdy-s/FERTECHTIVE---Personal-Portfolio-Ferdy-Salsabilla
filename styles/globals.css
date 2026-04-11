@@ -1,5 +1,7 @@
 /* styles/globals.css */
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* atau tema lain yang kamu suka */
 
@@ -53,7 +55,6 @@
 }
 
 .btn-primary {
-  @apply inline-flex items-center justify-center rounded-full font-bold;
   background: linear-gradient(135deg, #38bdf8, #6366f1);
   color: #04101e;
   transition: all 0.25s ease;
