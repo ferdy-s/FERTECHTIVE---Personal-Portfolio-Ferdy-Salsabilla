@@ -54,13 +54,30 @@ export default async function AdminPostsPage({
     : {};
 
   const [posts, categories, totalCount] = await Promise.all([
-    prisma.post.findMany({
-      where,
-      orderBy: { createdAt: "desc" },
-      include: { categories: true, author: true },
+    prisma.post
+      .findMany({
+        where,
+        orderBy: { createdAt: "desc" },
+        include: { categories: true, author: true },
+      })
+      .catch((e) => {
+        console.error("posts error:", e);
+        return [];
+      }),
+
+    prisma.category
+      .findMany({
+        orderBy: { name: "asc" },
+      })
+      .catch((e) => {
+        console.error("categories error:", e);
+        return [];
+      }),
+
+    prisma.post.count().catch((e) => {
+      console.error("count error:", e);
+      return 0;
     }),
-    prisma.category.findMany({ orderBy: { name: "asc" } }),
-    prisma.post.count(),
   ]);
 
   const publishedCount = posts.filter((p) => p.publishedAt).length;
