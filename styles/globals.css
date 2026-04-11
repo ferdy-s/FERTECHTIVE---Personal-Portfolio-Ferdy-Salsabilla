@@ -55,9 +55,11 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #38bdf8, #6366f1);
-  color: #04101e;
-  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: 700;
 }
 .btn-primary:hover {
   transform: translateY(-1px) scale(1.02);

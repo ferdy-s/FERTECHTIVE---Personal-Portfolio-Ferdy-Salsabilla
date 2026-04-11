@@ -7,7 +7,12 @@ const nextConfig: NextConfig = {
   },
 
   images: {
-    domains: ["images.unsplash.com", "ipfs.io"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 
   experimental: {
@@ -15,11 +20,6 @@ const nextConfig: NextConfig = {
       allowedOrigins: ["*"], // ubah ke domain asli saat sudah live
       bodySizeLimit: "20mb",
     },
-  },
-
-  // 🔥 WAJIB agar build tidak gagal karena ESLint
-  eslint: {
-    ignoreDuringBuilds: true,
   },
 
   // 🔥 Jika TypeScript error masih banyak (sementara saja)

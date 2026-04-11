@@ -11,7 +11,8 @@
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
     "db:generate": "prisma generate",
-    "test": "jest"
+    "test": "jest",
+    "type": "module"
   },
   "dependencies": {
     "@lexical/code": "^0.40.0",
@@ -42,7 +43,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.2.2",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.19.19",
     "@types/nodemailer": "^7.0.9",
