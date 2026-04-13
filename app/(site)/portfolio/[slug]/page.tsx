@@ -7,6 +7,13 @@ import LightboxGallery from "@/components/LightboxGallery";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
 
+/* ===== Helpers ===== */
+const safeDesc = (v?: string | null) =>
+  v ? v.slice(0, 160) : "";
+
+const safeTitle = (v?: string | null) =>
+  v ? v.slice(0, 70) : "";
+
 /* ===== Metadata ===== */
 export async function generateMetadata({
   params,
@@ -26,27 +33,43 @@ export async function generateMetadata({
 
   const url = `${SITE_URL}/portfolio/${p.slug}`;
 
+  const title = safeTitle(p.metaTitle || p.title);
+  const description = safeDesc(p.metaDescription || p.description);
+
   return {
-    title: p.metaTitle || p.title,
-    description: p.metaDescription || p.description,
+    title,
+    description,
     alternates: { canonical: url },
+
     openGraph: {
       type: "article",
       url,
-      title: p.metaTitle || p.title,
-      description: p.metaDescription || p.description,
-      images: [{ url: p.ogImage || p.thumbnailUrl || "/default-cover.jpg" }],
+      title,
+      description,
+      images: [
+        {
+          url:
+            p.ogImage ||
+            p.thumbnailUrl ||
+            `${SITE_URL}/default-cover.jpg`,
+        },
+      ],
     },
+
     twitter: {
       card: "summary_large_image",
-      title: p.metaTitle || p.title,
-      description: p.metaDescription || p.description,
-      images: [p.ogImage || p.thumbnailUrl || "/default-cover.jpg"],
+      title,
+      description,
+      images: [
+        p.ogImage ||
+          p.thumbnailUrl ||
+          `${SITE_URL}/default-cover.jpg`,
+      ],
     },
   };
 }
 
-/* ===== Helpers ===== */
+/* ===== Helpers (UI) ===== */
 const s = (v: unknown) => (typeof v === "string" ? v : "");
 const a = (v: unknown) => (Array.isArray(v) ? v.map(String) : []);
 
@@ -59,6 +82,7 @@ export default async function PortfolioDetailPage({
   const project = await prisma.project.findUnique({
     where: { slug: params.slug },
   });
+
   if (!project) return notFound();
 
   const title = s(project.title);
@@ -81,9 +105,10 @@ export default async function PortfolioDetailPage({
       [background-size:32px_32px]"
       />
 
-      {/* ================= HERO ================= */}
+      {/* HERO */}
       <header className="mx-auto max-w-[1400px] px-5 sm:px-8 md:px-10 pt-24 sm:pt-28 md:pt-40 pb-8 sm:pb-10 md:pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+          
           {/* TEXT */}
           <div className="lg:col-span-5">
             <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs uppercase tracking-wide text-white/60">
@@ -112,7 +137,7 @@ export default async function PortfolioDetailPage({
             )}
           </div>
 
-          {/* VISUAL */}
+          {/* IMAGE */}
           <div className="lg:col-span-7 mt-2 lg:mt-0">
             <figure className="relative aspect-[14/9] overflow-hidden rounded-3xl border border-white/10 bg-[#10131A] shadow-[0_40px_120px_-50px_rgba(0,0,0,0.85)]">
               <Image
@@ -135,15 +160,10 @@ export default async function PortfolioDetailPage({
         </div>
       </header>
 
-      {/* ================= CONTENT ================= */}
+      {/* CONTENT */}
       <main className="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-14 pb-16 sm:pb-20">
         <article
-          className="prose prose-invert max-w-none
-        prose-p:text-white/85 prose-a:text-sky-400 hover:prose-a:text-sky-300
-        prose-strong:text-white prose-blockquote:border-sky-500/40
-        prose-h2:text-white prose-h3:text-white/90
-        prose-img:rounded-xl prose-img:border prose-img:border-white/10
-        leading-[1.8]"
+          className="prose prose-invert max-w-none leading-[1.8]"
           dangerouslySetInnerHTML={{ __html: html }}
         />
 
