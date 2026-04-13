@@ -1,10 +1,41 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { supabase } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 import { randomUUID } from "crypto";
-import fs from "fs";
 import path from "path";
+
+export async function uploadImage(formData: FormData) {
+  const file = formData.get("file");
+
+  if (!(file instanceof File)) {
+    throw new Error("File tidak ditemukan.");
+  }
+
+  const buffer = Buffer.from(await file.arrayBuffer());
+
+  const ext = path.extname(file.name) || ".jpg";
+  const filename = `${Date.now()}-${randomUUID()}${ext}`;
+
+  const filePath = `posts/${filename}`;
+
+  // Upload ke Supabase
+  const { error } = await supabase.storage
+    .from("projects") // tetap pakai bucket yang sama
+    .upload(filePath, buffer, {
+      contentType: file.type,
+      upsert: true,
+    });
+
+  if (error) {
+    throw new Error("Upload gagal: " + error.message);
+  }
+
+  const { data } = supabase.storage.from("projects").getPublicUrl(filePath);
+
+  return { url: data.publicUrl };
+}
 
 // ========= Helpers =========
 function slugify(input: string) {
@@ -24,23 +55,13 @@ function parseKeywords(input: string | null | undefined): string[] {
     .filter(Boolean);
 }
 
-async function saveFile(file: File): Promise<string> {
-  const bytes = Buffer.from(await file.arrayBuffer());
-  const ext = path.extname(file.name) || ".bin";
-  const filename = `${Date.now()}-${randomUUID()}${ext}`;
-  const uploadDir = path.join(process.cwd(), "public", "uploads");
-  if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
-  fs.writeFileSync(path.join(uploadDir, filename), bytes);
-  return `/uploads/${filename}`;
-}
-
 /** Cari authorId cadangan bila tidak dikirim */
 async function resolveAuthorId(explicitAuthorId?: string): Promise<string> {
   if (explicitAuthorId) return explicitAuthorId;
   const anyUser = await prisma.user.findFirst({ select: { id: true } });
   if (!anyUser) {
     throw new Error(
-      "Author wajib diisi. Tidak ditemukan user mana pun di database. Buat minimal 1 user dulu atau kirimkan authorId saat upsertPost."
+      "Author wajib diisi. Tidak ditemukan user mana pun di database. Buat minimal 1 user dulu atau kirimkan authorId saat upsertPost.",
     );
   }
   return anyUser.id;
@@ -53,7 +74,7 @@ async function resolveAuthorId(explicitAuthorId?: string): Promise<string> {
  */
 async function ensureUniqueSlug(
   base: string,
-  excludeId?: string
+  excludeId?: string,
 ): Promise<string> {
   const rawBase = slugify(base);
   // Ambil semua slug yang diawali rawBase (untuk menghitung suffix berikutnya)
@@ -207,12 +228,4 @@ export async function deletePost(id: string) {
   await prisma.post.delete({ where: { id } });
   revalidatePath("/admin/posts");
   return { ok: true };
-}
-
-// ========= Upload =========
-export async function uploadImage(formData: FormData) {
-  const file = formData.get("file");
-  if (!(file instanceof File)) throw new Error("File tidak ditemukan.");
-  const url = await saveFile(file);
-  return { url };
 }
