@@ -1,15 +1,15 @@
-export { default } from "./(site)/page";
 import type { Metadata } from "next";
+import HomeClient from "./HomeClient";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://fertechtive-personal-portfolio-ferd-two.vercel.app/";
+  "https://fertechtive-personal-portfolio-ferd-two.vercel.app";
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Fertechtive | Portfolio Digital Ferdy Salsabilla";
 
   const description =
-    "Fertechtive adalah portfolio digital resmi Ferdy Salsabilla yang menampilkan karya Web Development, UI/UX Design, dan eksplorasi teknologi modern.";
+    "Fertechtive adalah portfolio digital resmi Ferdy Salsabilla...";
 
   return {
     title,
@@ -37,4 +37,8 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [`${SITE_URL}/cover_fertechtive.png`],
     },
   };
+}
+
+export default function Page() {
+  return <HomeClient />;
 }
