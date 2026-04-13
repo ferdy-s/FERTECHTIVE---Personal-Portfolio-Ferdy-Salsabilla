@@ -3,7 +3,7 @@ export const runtime = "nodejs";
 
 import { prisma } from "@/lib/prisma";
 import { deriveCategory } from "@/lib/categories";
-
+import ProjectUpload from "@/components/ProjectUpload";
 import FilePicker from "./FilePicker";
 import CategorySelect from "./CategorySelect";
 import SlugField from "./SlugField";
@@ -150,12 +150,16 @@ export default async function AdminProjectsPage() {
             hint="comma / new lines (e.g. next.js, uiux)"
           />
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-            <FilePicker
-              name="images"
-              accept=".jpg,.jpeg,.png,image/jpeg,image/png"
-              maxBytes={8 * 1024 * 1024}
-              maxFiles={12}
+            <ProjectUpload
+              onUploaded={(urls) => {
+                const input = document.getElementById(
+                  "images-input",
+                ) as HTMLInputElement;
+                if (input) input.value = JSON.stringify(urls);
+              }}
             />
+
+            <input type="hidden" name="images" id="images-input" />
           </div>
         </div>
 

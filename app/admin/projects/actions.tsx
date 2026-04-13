@@ -15,9 +15,9 @@ import {
 /* ========= Constants ========= */
 const ALLOWED_MIME = new Set(["image/jpeg", "image/png"]);
 const ALLOWED_EXT = new Set([".jpg", ".jpeg", ".png"]);
-const MAX_BYTES = 8 * 1024 * 1024; // 8MB per file
+const MAX_BYTES = 2 * 1024 * 1024; // 2MB per file
 const MAX_FILES = 12; // max 12 files
-const MAX_TOTAL = 20 * 1024 * 1024; // 20MB total
+const MAX_TOTAL = 4 * 1024 * 1024; // 4MB
 
 /* ========= Small helpers ========= */
 const ext = (name: string) => path.extname(name || "").toLowerCase();
@@ -219,6 +219,8 @@ export async function upsertProject(form: FormData) {
   const description = String(form.get("description") ?? "").trim();
   const content = String(form.get("content") ?? "");
   const tagsInput = String(form.get("tags") ?? "");
+  const imagesJson = form.get("images") as string;
+  const images = imagesJson ? JSON.parse(imagesJson) : [];
   const publishedOn = String(form.get("published") ?? "");
   const categoryRaw =
     (form.get("category") as string | null)?.toLowerCase() ?? "";
