@@ -91,10 +91,10 @@ export default function PortfolioClient({
       />
 
       {/* HERO */}
-      <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-10 pt-6 md:pt-20">
+      <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-10 pt-28 md:pt-40">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
           <div className="order-first lg:order-last">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-1 mt-23">
+           <div className="rounded-2xl border border-white/10 bg-white/5 p-1 mt-2">
               <div className="relative aspect-[16/8] w-full overflow-hidden rounded-xl border border-white/10">
                 <Image
                   src="/portfolio.png"
@@ -114,18 +114,17 @@ export default function PortfolioClient({
                 Portfolio
               </span>
             </h1>
-            <p className="mt-5 text-[15px] md:text-[17px] lg:text-[15px] text-white/80 leading-relaxed max-w-2xl">
-              Kumpulan karya profesional dalam Web Development, UI/UX Design,
-              Graphic Design, dan Digital Marketing, dengan fokus pada performa,
-              user experience, dan optimalisasi SEO untuk menghasilkan solusi
-              digital yang efektif dan berdampak.
-            </p>
+       <p className="mt-4 text-[16px] leading-7 text-neutral-300 max-w-2xl">
+  Kumpulan karya profesional dalam Web Development, UI/UX Design,
+  Graphic Design, dan Digital Marketing, dengan fokus pada performa,
+  user experience, dan optimalisasi SEO untuk menghasilkan solusi
+  digital yang efektif dan berdampak.
+</p>
 
             <div className="flex flex-wrap gap-3 pt-1">
               <Link
                 href="/blog"
-                className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-base font-medium text-black transition hover:bg-white/90"
-              >
+            className="inline-flex items-center justify-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition hover:bg-white/90"  >
                 Jelajahi Tips
               </Link>
 
@@ -249,7 +248,7 @@ function CategoryBar({
   totals: Totals;
 }) {
   return (
-    <div className="sticky top-16 z-20 mt-8 mb-8">
+   <div className="sticky top-20 z-20 mt-12 mb-8">
       {/* MOBILE */}
       <div className="mx-auto max-w-screen-md px-4 sm:px-6 lg:hidden">
         <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur">

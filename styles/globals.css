@@ -4,6 +4,34 @@
 @tailwind utilities;
 
 /* atau tema lain yang kamu suka */
+/* === GLOBAL TYPOGRAPHY RESET (ELEGAN & RAMPING) === */
+
+.html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.body {
+  font-weight: 400; /* normal, tidak bold */
+  letter-spacing: -0.01em; /* sedikit rapat = elegan */
+  color: #e5e7eb; /* setara text-zinc-300 */
+}
+
+/* Paragraph default */
+.p {
+  font-weight: 100;
+  line-height: 1.7;
+  color: #d1d5db; /* lebih soft dari white */
+}
+
+/* Heading tetap sedikit lebih kuat, tapi tidak tebal */
+.h1 {
+  font-weight: 600;
+}
+
+.h2, h3 {
+  font-weight: 500;
+}
 
 /* === Onion look additions === */
 .glass-onion {
@@ -60,7 +88,13 @@
   justify-content: center;
   border-radius: 9999px;
   font-weight: 700;
+
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  color: #04101e;
+
+  transition: all 0.25s ease;
 }
+
 .btn-primary:hover {
   transform: translateY(-1px) scale(1.02);
   opacity: 0.9;
@@ -70,4 +104,8 @@ h1,
 h2,
 h3 {
   letter-spacing: -0.01em;
+}
+
+.p {
+  font-weight: 400;
 }

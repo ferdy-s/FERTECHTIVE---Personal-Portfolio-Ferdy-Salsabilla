@@ -67,7 +67,7 @@ export default function Page() {
           <div className="md:col-span-7 max-w-3xl md:pl-6 lg:pl-10">
             <FadeIn
               as="h1"
-              className="text-3xl md:text-5xl lg:text-[56px] font-extrabold leading-tight tracking-tight"
+              className="text-3xl md:text-5xl lg:text-[56px] font-bold leading-tight tracking-tight"
             >
               Tentang{" "}
               <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-violet-400 bg-clip-text text-transparent">
@@ -150,22 +150,6 @@ export default function Page() {
                     aria-label="Navigasi Profesional"
                     className="lg:sticky lg:top-28 h-fit"
                   >
-                    {/* LABEL NAVIGASI */}
-                    <div
-                      className="
-hidden lg:flex items-center gap-2
-px-5 py-3 mb-4
-rounded-xl
-bg-gradient-to-b from-white/35 to-white/10
-backdrop-blur-xl
-text-sm font-semibold
-text-white
-shadow-[0_8px_30px_rgba(0,0,0,0.35)]
-"
-                    >
-                      <PanelLeft className="w-4 h-4" />
-                      Navigasi Modul
-                    </div>
 
                     <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible">
                       {modules.map((m) => (

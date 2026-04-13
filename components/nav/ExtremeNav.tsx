@@ -67,7 +67,7 @@ export default function ExtremeNav() {
           {/* Brand (desktop) */}
           <Link
             href="/"
-            className="hidden md:inline-flex items-center gap-2 text-[26px] font-extrabold tracking-wide"
+            className="hidden md:inline-flex items-center gap-2 text-[22px] font-medium tracking-tight"
             aria-label="Fertechtive home"
           >
             Fertechtive<span className="text-cyan-300">.</span>
@@ -77,15 +77,15 @@ export default function ExtremeNav() {
           <div className="hidden md:flex w-full justify-center">
             <nav
               aria-label="Primary"
-              className="inline-flex items-center gap-6 rounded-full border border-white/5
-              bg-white/10 backdrop-blur-xl px-3.5 py-2.5 shadow-[0_10px_28px_rgba(0,0,0,.25)]"
+             className="inline-flex items-center gap-6 rounded-full border border-white/10
+bg-white/5 backdrop-blur-md px-4 py-2.5"
             >
               {NAV.map(({ href, label, icon: Icon }) => (
                 <Link
                   key={href}
                   href={href}
-                  className={`inline-flex items-center gap-2.5 rounded-full px-4.5 py-2.5 text-[15px] font-semibold transition
-                  ${isActive(href) ? "bg-white text-black" : "text-white/90 hover:bg-white/12"}`}
+                  className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[14px] font-normal transition
+${isActive(href) ? "bg-white text-black" : "text-white/70 hover:text-white hover:bg-white/10"}`}
                 >
                   <Icon
                     className={`h-[18px] w-[18px] ${isActive(href) ? "text-black" : "text-white/70"}`}
@@ -170,12 +170,12 @@ export default function ExtremeNav() {
         {/* Drawer header with brand + X */}
         <div className="flex items-center justify-between px-5 pt-5 pb-3">
           <Link
-            href="/"
-            className="text-[20px] font-extrabold tracking-wide"
-            onClick={() => setOpen(false)}
-          >
-            Fertechtive<span className="text-cyan-300">.</span>
-          </Link>
+  href="/"
+  className="text-[20px] font-semibold tracking-tight flex items-center"
+  onClick={() => setOpen(false)}
+>
+  Fertechtive<span className="text-cyan-300 ml-[1px]">.</span>
+</Link>
           <button
             onClick={() => setOpen(false)}
             aria-label="Tutup menu"

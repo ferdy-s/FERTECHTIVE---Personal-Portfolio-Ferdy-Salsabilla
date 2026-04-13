@@ -1,6 +1,6 @@
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://your-devtunnel-url.dev";
+  "https://fertechtive-personal-portfolio-ferd-two.vercel.app/";
 
 export default function Head() {
   const title =

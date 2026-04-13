@@ -61,7 +61,7 @@ export default function BlogListClient({
     <>
       {/* ================= SEARCH ================= */}
       <section
-        className="sticky top-[84px] z-30 mb-4 rounded-2xl border border-white/12 bg-[#0C121B]/80 backdrop-blur-xl shadow-[0_10px_36px_rgba(0,0,0,0.35)]"
+        className="sticky top-[84px] z-30 mb-4 rounded-2xl border border-white/10 bg-[#0C121B]/80 backdrop-blur-xl shadow-[0_10px_36px_rgba(0,0,0,0.35)]"
         role="search"
         aria-label="Pencarian artikel"
       >
@@ -117,7 +117,7 @@ export default function BlogListClient({
       {/* ================= CATEGORY FILTER ================= */}
       {categories.length > 0 && (
         <nav
-          className="sticky top-[152px] z-20 mb-10 rounded-2xl border border-white/12 bg-white/[0.03] backdrop-blur-xl"
+          className="sticky top-[152px] z-20 mb-10 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl"
           aria-label="Filter kategori"
         >
           <div className="overflow-x-auto px-3 py-3 sm:px-4">

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://l6qsd05x-3000.asse.devtunnels.ms";
+  "https://fertechtive-personal-portfolio-ferd-two.vercel.app/";
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Fertechtive | Portfolio Digital Ferdy Salsabilla";

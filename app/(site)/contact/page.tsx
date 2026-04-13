@@ -3,7 +3,7 @@ import ContactClient from "./ContactClient";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  "https://l6qsd05x-3000.asse.devtunnels.ms";
+  "https://fertechtive-personal-portfolio-ferd-two.vercel.app/";
 
 const title = "Kontak";
 

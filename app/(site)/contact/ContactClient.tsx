@@ -34,7 +34,7 @@ Pesan:%0A${message}`;
       <div className="h-28 sm:h-32 lg:h-44" />
 
       {/* CONTACT CONTENT */}
-      <div className="px-4 pb-18">
+      <div className="px-4 pb-20">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           {/* LEFT SIDE */}
           <div className="lg:col-span-5 space-y-10">
@@ -281,52 +281,6 @@ Pesan:%0A${message}`;
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      {/* LOCATION MAP */}
-      <div className=" max-w-7xl mx-auto px-6 pb-10">
-        <div className="space-y-6">
-          {/* Title */}
-          <div className="flex flex-col items-center text-center space-y-4 max-w-2xl mx-auto">
-            <button
-              className="
-    inline-flex items-center
-    rounded-full
-    border border-white/20
-    bg-gradient-to-r
-    from-zinc-200/90 via-zinc-100 to-zinc-300
-    px-4 py-1.5
-    text-[12px]
-    font-semibold
-    uppercase
-    tracking-wider
-    text-black
-    backdrop-blur
-    shadow-[0_4px_12px_rgba(255,255,255,0.12)]
-  "
-            >
-              Alamat Domisili
-            </button>
-
-            <h2 className="text-2xl md:text-3xl font-semibold text-white">
-              Mari Mampir ke Rumah Saya
-            </h2>
-
-            <p className="text-white/70 text-sm md:text-base leading-relaxed max-w-3x1">
-              Perumahan Citra Prima Serpong 2 Blok CC 2 No 17, Kelurahan
-              Kranggan, Kecamatan Setu, Kota Tangerang Selatan, Banten.
-            </p>
-          </div>
-
-          {/* Map Container */}
-          <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-white/5 backdrop-blur-xl shadow-[0_10px_40px_rgba(255,255,255,0.05)]">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.83942021686323!2d106.65964159528218!3d-6.338216058963101!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e4f171701477%3A0xf40ecfc6651d5bdb!2sBlk.%20Dd3%20Blok%20CC2%20No.17%2C%20Kranggan%2C%20Kec.%20Setu%2C%20Kota%20Tangerang%20Selatan%2C%20Banten%2015312!5e0!3m2!1sid!2sid!4v1773027099464!5m2!1sid!2sid"
-              className="w-full h-[380px] md:h-[420px] lg:h-[450px] border-0 brightness-[0.75] contrast-[1.1] grayscale"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
           </div>
         </div>
       </div>

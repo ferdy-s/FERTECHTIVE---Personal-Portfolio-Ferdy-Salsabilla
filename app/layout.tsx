@@ -1,10 +1,24 @@
 // app/layout.tsx
 import "../styles/globals.css";
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://l6qsd05x-3000.asse.devtunnels.ms";
+  "https://fertechtive-personal-portfolio-ferd-two.vercel.app/";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -27,7 +41,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body className="bg-black text-white antialiased">{children}</body>
+      <body className={`${inter.className} bg-black text-white antialiased`}>
+        {children}
+      </body>
+      <body className={`${roboto.className} bg-black text-white antialiased`}></body>
     </html>
   );
 }
