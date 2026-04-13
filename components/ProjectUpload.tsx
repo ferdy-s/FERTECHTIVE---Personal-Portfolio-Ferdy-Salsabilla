@@ -1,20 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { supabaseClient } from "@/lib/supabase-client";
 
-export default function ProjectUpload({
-  onUploaded,
-}: {
-  onUploaded: (urls: string[]) => void;
-}) {
-  const [loading, setLoading] = useState(false);
-
+export default function ProjectUpload() {
   async function handleUpload(files: FileList | null) {
     if (!files) return;
-
-    setLoading(true);
-    const urls: string[] = [];
 
     for (const file of Array.from(files)) {
       const path = `projects/${Date.now()}-${file.name}`;
@@ -33,22 +23,24 @@ export default function ProjectUpload({
         .getPublicUrl(path);
 
       if (data?.publicUrl) {
-        urls.push(data.publicUrl);
+        const input = document.getElementById(
+          "images-input",
+        ) as HTMLInputElement;
+
+        if (input) {
+          const current = input.value ? JSON.parse(input.value) : [];
+
+          input.value = JSON.stringify([...current, data.publicUrl]);
+        }
       }
     }
-
-    setLoading(false);
-    onUploaded(urls);
   }
 
   return (
-    <div>
-      <input
-        type="file"
-        multiple
-        onChange={(e) => handleUpload(e.target.files)}
-      />
-      {loading && <p>Uploading...</p>}
-    </div>
+    <input
+      type="file"
+      multiple
+      onChange={(e) => handleUpload(e.target.files)}
+    />
   );
 }

@@ -150,15 +150,7 @@ export default async function AdminProjectsPage() {
             hint="comma / new lines (e.g. next.js, uiux)"
           />
           <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-            <ProjectUpload
-              onUploaded={(urls) => {
-                const input = document.getElementById(
-                  "images-input",
-                ) as HTMLInputElement;
-                if (input) input.value = JSON.stringify(urls);
-              }}
-            />
-
+            <ProjectUpload />
             <input type="hidden" name="images" id="images-input" />
           </div>
         </div>
