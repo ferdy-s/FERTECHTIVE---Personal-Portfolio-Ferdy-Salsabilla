@@ -97,9 +97,7 @@ async function saveImages(slug: string, files: File[]) {
     }
 
     // ✅ Ambil public URL
-    const { data } = supabase.storage
-      .from("projects")
-      .getPublicUrl(filePath);
+    const { data } = supabase.storage.from("projects").getPublicUrl(filePath);
 
     if (!data?.publicUrl) {
       throw new Error("Gagal mendapatkan public URL");
@@ -154,19 +152,27 @@ const BaseSchema = z.object({
 });
 
 /* ========= Actions ========= */
-export async function togglePublish(id: string, to: boolean) {
+
+export async function togglePublish(formData: FormData) {
+  const id = formData.get("id") as string;
+  const to = formData.get("published") === "true";
+
   const p = await prisma.project.findUnique({ where: { id } });
   if (!p) throw new Error("Project tidak ditemukan");
 
-  // set publishedAt hanya ketika berubah dari false -> true dan belum ada publishedAt
   const data: { published: boolean; publishedAt?: Date | null } = {
     published: to,
   };
-  if (to && !p.publishedAt) data.publishedAt = new Date();
 
-  await prisma.project.update({ where: { id }, data });
+  if (to && !p.publishedAt) {
+    data.publishedAt = new Date();
+  }
 
-  // revalidate daftar, detail, sitemap
+  await prisma.project.update({
+    where: { id },
+    data,
+  });
+
   revalidatePath("/admin/projects");
   revalidatePath("/portfolio");
   revalidatePath(`/portfolio/${p.slug}`);
@@ -174,20 +180,36 @@ export async function togglePublish(id: string, to: boolean) {
   revalidatePath("/robots.txt");
 }
 
-export async function deleteProject(id: string) {
+export async function deleteProject(formData: FormData) {
+  const id = formData.get("id") as string;
+
+  if (!id) {
+    throw new Error("ID tidak ditemukan");
+  }
+
   const p = await prisma.project.findUnique({
     where: { id },
     select: { slug: true },
   });
-  await prisma.project.delete({ where: { id } });
+
+  if (!p) {
+    throw new Error("Project tidak ditemukan");
+  }
+
+  await prisma.project.delete({
+    where: { id },
+  });
+
   revalidatePath("/admin/projects");
   revalidatePath("/portfolio");
-  if (p?.slug) revalidatePath(`/portfolio/${p.slug}`);
+
+  if (p.slug) {
+    revalidatePath(`/portfolio/${p.slug}`);
+  }
+
   revalidatePath("/sitemap.xml");
   revalidatePath("/robots.txt");
 }
-
-
 
 export async function upsertProject(form: FormData) {
   // Ambil field dasar

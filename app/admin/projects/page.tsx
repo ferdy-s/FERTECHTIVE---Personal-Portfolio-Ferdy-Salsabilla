@@ -269,7 +269,14 @@ export default async function AdminProjectsPage() {
                   </Td>
 
                   <Td>
-                    <form action={togglePublish.bind(null, p.id, !p.published)}>
+                    <form action={togglePublish}>
+                      <input type="hidden" name="id" value={p.id} />
+                      <input
+                        type="hidden"
+                        name="published"
+                        value={String(!p.published)}
+                      />
+
                       <button
                         className={[
                           "rounded-full px-3 py-1 text-xs transition",
@@ -343,7 +350,9 @@ export default async function AdminProjectsPage() {
                   </Td>
 
                   <Td>
-                    <form action={deleteProject.bind(null, p.id)}>
+                    <form action={deleteProject}>
+                      <input type="hidden" name="id" value={p.id} />
+
                       <button className="rounded-full border border-rose-400/30 px-3 py-1 text-xs text-rose-300 transition hover:bg-rose-500/10">
                         Delete
                       </button>
@@ -395,7 +404,7 @@ function Td({
   return (
     <td
       className={["px-3 py-2 align-top", "text-white/90", className ?? ""].join(
-        " "
+        " ",
       )}
       colSpan={colSpan}
     >
