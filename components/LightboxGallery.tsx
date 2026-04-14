@@ -90,12 +90,10 @@ export default function LightboxGallery({ gallery, title }: Props) {
               transition-transform duration-500 hover:scale-[1.03]
               cursor-pointer"
             >
-              <Image
+              <img
                 src={src}
                 alt={`${title} preview ${i + 1}`}
-                fill
-                sizes="(max-width:1024px) 100vw, 480px"
-                className="object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
           ))}

@@ -1,17 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import ProjectUpload from "@/components/ProjectUpload";
 import { upsertProject } from "@/app/admin/projects/actions";
 
 export default function AdminProjectForm() {
-  return (
-    <form action={upsertProject} className="grid gap-4">
-      <input name="title" placeholder="Title" />
+  const [images, setImages] = useState<string[]>([]);
 
-      {/* Upload */}
+  return (
+    <form action={upsertProject}>
+      <input name="title" />
+
       <ProjectUpload />
 
-      {/* Hidden input untuk simpan URL */}
+      {/* 🔥 INI WAJIB ADA */}
       <input type="hidden" name="images" id="images-input" />
 
       <button>Save</button>

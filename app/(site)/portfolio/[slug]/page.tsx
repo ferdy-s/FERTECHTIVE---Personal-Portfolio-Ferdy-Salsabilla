@@ -82,8 +82,11 @@ export default async function PortfolioDetailPage({
   const desc = s(project.description);
   const tags = a(project.tags);
   const html = s(project.content);
-  const cover = s(project.thumbnailUrl) || "/default-cover.jpg";
-  const gallery = Array.isArray(project.images) ? project.images : [];
+  const images = Array.isArray(project.images) ? project.images : [];
+
+  const cover = project.thumbnailUrl || images[0] || "/default-cover.jpg";
+
+  const gallery = images;
 
   return (
     <section className="relative min-h-screen bg-[#0B0D12] text-white antialiased">

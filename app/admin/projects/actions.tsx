@@ -220,8 +220,17 @@ export async function upsertProject(form: FormData) {
   const tagsInput = String(form.get("tags") ?? "");
 
   // ✅ ambil dari hidden input (hasil upload client)
-  const imagesJson = form.get("images") as string;
-  const images: string[] = imagesJson ? JSON.parse(imagesJson) : [];
+  const imagesRaw = form.get("images") as string;
+
+  let images: string[] = [];
+  let thumbnail: string | null = null;
+
+  if (imagesRaw) {
+    const parsed = JSON.parse(imagesRaw);
+
+    images = parsed.images || [];
+    thumbnail = parsed.thumbnail || null;
+  }
 
   const publishedOn = String(form.get("published") ?? "");
   const categoryRaw =
@@ -298,7 +307,8 @@ export async function upsertProject(form: FormData) {
       ? [...prevImages, ...images]
       : prevImages;
 
-    const thumbnailUrl = existing.thumbnailUrl ?? mergedImages[0] ?? null;
+    const thumbnailUrl =
+      thumbnail ?? existing.thumbnailUrl ?? mergedImages[0] ?? null;
 
     const nowPublish = Boolean(publishedOn);
     const setPublishedAt =
@@ -338,7 +348,7 @@ export async function upsertProject(form: FormData) {
 
   // ================= CREATE =================
 
-  const thumbnailUrl = images[0] ?? null;
+  const thumbnailUrl = thumbnail ?? images[0] ?? null;
 
   await prisma.project.create({
     data: {
