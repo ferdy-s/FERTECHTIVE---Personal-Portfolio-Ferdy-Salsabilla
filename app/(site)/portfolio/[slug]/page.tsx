@@ -4,6 +4,9 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import LightboxGallery from "@/components/LightboxGallery";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || "https://fertechtive.vercel.app";
@@ -155,14 +158,14 @@ export default async function PortfolioDetailPage({
       </header>
 
       {/* CONTENT */}
-      <main className="mx-auto max-w-[1400px] px-5 sm:px-10 lg:px-14 pb-16 sm:pb-20">
+      <main className="mx-auto max-w-[1250px] px-5 sm:px-10 lg:px-14 pb-16 sm:pb-20">
         <article
-          className="prose prose-invert max-w-none leading-[1.8]"
+          className="prose prose-invert max-w-none leading-[1.7] text-white/85"
           dangerouslySetInnerHTML={{ __html: html }}
         />
 
         {!html && (
-          <p className="mt-8 text-center text-sm text-white/45">
+          <p className="mt-9 text-center text-sm text-white/45">
             Konten proyek ini belum diisi.
           </p>
         )}
